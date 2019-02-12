@@ -13,4 +13,4 @@ Sequence diagram: - Integration between objects in the sequence in which they t
 Activity Diagram: 
 ![alt text][activity]
 
-[activity]: https://github.com/mpUrban/Aviation_Decentralized_Supply_Chain/blob/master/diagrams/AviationUsedPartStoreUML_activity.pdf "Activity Diagram"
+[activity]:https://github.com/mpUrban/Aviation_Decentralized_Supply_Chain/blob/master/diagrams/AviationUsedPartStoreUML_activity.pdf "Activity Diagram"
