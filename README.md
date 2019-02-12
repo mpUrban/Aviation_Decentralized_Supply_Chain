@@ -9,7 +9,7 @@ Activity diagram: - Flow of one activity to another in the system. Captures dyn
 Sequence diagram: - Integration between objects in the sequence in which they take place.
 
 
-
+## Activity Diagram:
 
 ![alt text][activity]
 
