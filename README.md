@@ -8,15 +8,16 @@ State diagram: - Shows changes from one state to another and usually depicts th
 Activity diagram: - Flow of one activity to another in the system. Captures dynamic behavior of the system.
 Sequence diagram: - Integration between objects in the sequence in which they take place.
 
-
 ## Activity Diagram:
-
 ![alt text][activity]
 
+## Sequence Diagram:
 ![alt text][sequence]
 
+## State Diagram:
 ![alt text][state]
 
+## Class Diagram:
 ![alt text][class]
 
 
