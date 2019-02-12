@@ -10,7 +10,20 @@ Sequence diagram: - Integration between objects in the sequence in which they t
 
 
 
-Activity Diagram: 
+
 ![alt text][activity]
 
+![alt text][sequence]
+
+![alt text][state]
+
+![alt text][class]
+
+
 [activity]:https://github.com/mpUrban/Aviation_Decentralized_Supply_Chain/blob/master/diagrams/activity1.png "Activity Diagram"
+
+[sequence]:https://github.com/mpUrban/Aviation_Decentralized_Supply_Chain/blob/master/diagrams/sequence1.png "Activity Diagram"
+
+[state]:https://github.com/mpUrban/Aviation_Decentralized_Supply_Chain/blob/master/diagrams/state1.png "Activity Diagram"
+
+[class]:https://github.com/mpUrban/Aviation_Decentralized_Supply_Chain/blob/master/diagrams/class1.png "Activity Diagram"
