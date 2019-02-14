@@ -23,7 +23,7 @@ These UML diagrams detail the architecture of an application to track used part 
 
 [activity]:https://github.com/mpUrban/Aviation_Decentralized_Supply_Chain/blob/master/diagrams/activity2.png "Activity Diagram"
 
-[sequence]:https://github.com/mpUrban/Aviation_Decentralized_Supply_Chain/blob/master/diagrams/sequence2.png "Activity Diagram"
+[sequence]:https://github.com/mpUrban/Aviation_Decentralized_Supply_Chain/blob/master/diagrams/sequence3.png "Activity Diagram"
 
 [state]:https://github.com/mpUrban/Aviation_Decentralized_Supply_Chain/blob/master/diagrams/state1.png "Activity Diagram"
 
