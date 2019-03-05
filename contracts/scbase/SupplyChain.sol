@@ -171,23 +171,10 @@ contract SupplyChain {
 
 
 
-//  WORKING HERE
-// define modifiers
-// define data to store
-// define fcns
-
-
-
-
-
-
-
-
-
   // Define a function 'removeItem' that allows a shop to mark an item 'Removed'
   function removeItem(uint _sn, address _originShopID, string memory _originShopName, string memory _originShopInformation, string memory  _originShopLatitude, string memory  _originShopLongitude, string memory  _productNotes) public 
-  
-  // verifyCaller?
+  verifyCaller(_originShopID)
+  // only shop role can call this function?  
 
   {
     // Check SN is new
@@ -225,27 +212,36 @@ contract SupplyChain {
 
   // Define a function 'cleanInspectItem' that allows a shop to mark an item 'CleanInspect'
   function cleanInspectItem(uint _sn) public 
-  // Call modifier to check if sn has passed previous supply chain stage
+
+  // Call modifier to check if sn has passed previous supply chain stage (is removed)
+  removed(_sn)
   
   // Call modifier to verify caller of this function
+  verifyCaller(items[_sn]._originShopID)
   
   {
     // Update the appropriate fields
+    items[_sn].itemState = State.CleanInspect;
     
     // Emit the appropriate event
+    emit CleanInspect(_sn);
     
   }
 
   // Define a function 'shipItem' that allows a shop to mark an item 'Shipped'
   function shipItem(uint _sn) public 
   // Call modifier to check if sn has passed previous supply chain stage
+  cleaninspect(_sn)
   
   // Call modifier to verify caller of this function
+  verifyCaller(items[_sn]._originShopID)
   
   {
     // Update the appropriate fields
-    
+    items[_sn].itemState = State.Shipped;
+
     // Emit the appropriate event
+    emit Shipped(_sn);
     
   }
 
