@@ -98,20 +98,6 @@ contract SupplyChain {
   }
 
 
-
-
-
-
-
-
-//  WORKING HERE
-// define modifiers
-// define data to store
-// define fcns
-
-
-
-
   // Define a modifier that checks if an item.state of a sn is Removed
   modifier removed(uint _sn) {
     require(items[_sn].itemState == State.Harvested);
@@ -185,16 +171,53 @@ contract SupplyChain {
 
 
 
+//  WORKING HERE
+// define modifiers
+// define data to store
+// define fcns
+
+
+
+
+
+
 
 
 
   // Define a function 'removeItem' that allows a shop to mark an item 'Removed'
-  function removeItem(uint _sn, address _originShopID, string _originShopName, string _originShopInformation, string  _originShopLatitude, string  _originShopLongitude, string  _productNotes) public 
+  function removeItem(uint _sn, address _originShopID, string memory _originShopName, string memory _originShopInformation, string memory  _originShopLatitude, string memory  _originShopLongitude, string memory  _productNotes) public 
+  
+  // verifyCaller?
+
   {
+    // Check SN is new
+    require(items[_sn].sn == 0, "SN already exists");
+
+    // Do I need to put in placeholder values?  
+
     // Add the new item as part of Removal
+    Item memory newItem;
+    newItem.sku = sku;
+    newItem.sn = _sn;
+    ownerID = msg.sender;
+    newItem.originShopID = msg.sender;
+    newItem.originShopName = _originShopName;
+    newItem.originShopInformation = _originShopInformation;
+    newItem.originShopLatitude = _originShopLatitude;
+    newItem.originShopLongitude = originShopLongitude;
+    newItem.productID = _sn; // add PN?
+    newItem.productNotes = _productNotes;
+    // newItem.productPrice = 0; // placeholder = to be updated following inspection?
+    newItem.itemState = State.Removed;
+    // newItem.storeID; // placeholder
+    // newItem.buyerID; // placeholder
     
     // Increment sku
     sku = sku + 1;
+
+    // Update mapping
+    items[_sn] = newItem;
+
     // Emit the appropriate event
     emit Removed(sn);
     
