@@ -58,7 +58,7 @@ contract SupplyChain {
 
 
 
-  // Define 8 events with the same 8 state values and accept 'sn' as input argument
+  // Define 7 events with the same 8 state values and accept 'sn' as input argument
   event Removed(uint sn);
   event CleanInspect(uint sn);
   event Shipped(uint sn);
@@ -104,6 +104,14 @@ contract SupplyChain {
 
 
 
+//  WORKING HERE
+// define modifiers
+// define data to store
+// define fcns
+
+
+
+
   // Define a modifier that checks if an item.state of a sn is Removed
   modifier removed(uint _sn) {
     require(items[_sn].itemState == State.Harvested);
@@ -112,40 +120,39 @@ contract SupplyChain {
 
   // Define a modifier that checks if an item.state of a sn is CleanInspect
   modifier cleaninspect(uint _sn) {
-
+    require(items[_sn].itemState == State.CleanInspect);
     _;
   }
   
   // Define a modifier that checks if an item.state of a sn is Shipped
   modifier shipped(uint _sn) {
-
+    require(items[_sn].itemState == State.Shipped);
     _;
   }
 
   // Define a modifier that checks if an item.state of a sn is Received
   modifier received(uint _sn) {
-
+    require(items[_sn].itemState == State.Received);
     _;
   }
 
   // Define a modifier that checks if an item.state of a sn is Inspected
   modifier inspected(uint _sn) {
-
+    require(items[_sn].itemState == State.CleanInspect);
     _;
   }
   
   // Define a modifier that checks if an item.state of a sn is Repaired
   modifier repaired(uint _sn) {
-
+    require(items[_sn].itemState == State.Repaired);
     _;
   }
 
   // Define a modifier that checks if an item.state of a sn is Purchased
   modifier purchased(uint _sn) {
-
+    require(items[_sn].itemState == State.Purchased;
     _;
   }
-
 
 
 
@@ -174,13 +181,6 @@ contract SupplyChain {
 
 
 
-
-
-
-
-//  WORKING HERE
-// define fcns
-// define data to store
 
 
 
