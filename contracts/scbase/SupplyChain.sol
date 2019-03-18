@@ -109,7 +109,7 @@ contract SupplyChain {
 
     // Define a modifier that checks if an item.state of a sn is Removed
     modifier removed(uint _sn) {
-        require(items[_sn].itemState == State.Harvested);
+        require(items[_sn].itemState == State.Removed);
         _;
     }
 
@@ -195,12 +195,12 @@ contract SupplyChain {
         Item memory newItem;
         newItem.sku = sku;
         newItem.sn = _sn;
-        ownerID = msg.sender;
+        //ownerID = msg.sender;
         newItem.originShopID = msg.sender;
         newItem.originShopName = _originShopName;
         newItem.originShopInformation = _originShopInformation;
         newItem.originShopLatitude = _originShopLatitude;
-        newItem.originShopLongitude = originShopLongitude;
+        newItem.originShopLongitude = _originShopLongitude;
         newItem.productID = _sn; // add PN?
         newItem.productNotes = _productNotes;
         // newItem.productPrice = 0; // placeholder = to be updated following inspection?
@@ -226,7 +226,7 @@ contract SupplyChain {
     removed(_sn)
 
     // Call modifier to verify caller of this function
-    verifyCaller(items[_sn]._originShopID)
+    verifyCaller(items[_sn].originShopID)
 
     {
         // Update the appropriate fields
@@ -243,7 +243,7 @@ contract SupplyChain {
     cleaninspect(_sn)
 
     // Call modifier to verify caller of this function
-    verifyCaller(items[_sn]._originShopID)
+    verifyCaller(items[_sn].originShopID)
 
     {
         // Update the appropriate fields
@@ -260,7 +260,7 @@ contract SupplyChain {
     shipped(_sn)
 
     // Call modifier to verify caller of this function
-    verifyCaller(items[_sn]._originShopID)
+    verifyCaller(items[_sn].originShopID)
 
     {
         // Update the appropriate fields
@@ -277,7 +277,7 @@ contract SupplyChain {
     received(_sn)
 
     // Call modifier to verify caller of this function
-    verifyCaller(items[_sn]._originShopID)
+    verifyCaller(items[_sn].originShopID)
 
     {
         // Update the appropriate fields
@@ -294,7 +294,7 @@ contract SupplyChain {
     inspected(_sn)
 
     // Call modifier to verify caller of this function
-    verifyCaller(items[_sn]._originShopID)
+    verifyCaller(items[_sn].originShopID)
 
     {
         // Update the appropriate fields
@@ -324,18 +324,17 @@ contract SupplyChain {
 
     {
 
-
         // Update the appropriate fields - ownerID, storeID, itemState
         items[_sn].ownerID = msg.sender;
         items[_sn].buyerID = msg.sender;
-        items[_sn].itemState = Purchased;
+        items[_sn].itemState = State.Purchased;
 
         // Transfer money to shop
         items[_sn].storeID.transfer(items[_sn].productPrice);
 
 
         // emit the appropriate event
-        emit SoldByManufacturer(_sn);
+        emit Purchased(_sn);
 
     }
 

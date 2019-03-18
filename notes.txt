@@ -1,0 +1,24 @@
+check node version
+node --version
+
+best to use LTS
+
+install truffle (<which truffle> to check if its there)
+
+sudo npm install -g truffle
+
+install truffle w v4.1.14
+npm i -g truffle@4.1.14
+
+
+This will by default use the following:
+Truffle v4.1.14 (core: 4.1.14)
+Solidity v0.4.24 (solc-js)
+
+
+ganache-cli -m "spirit supply whale amount human item harsh scare congress discover talent hamster"
+
+truffle compile
+
+truffle migrate
+
