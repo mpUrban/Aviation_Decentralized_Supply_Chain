@@ -348,8 +348,7 @@ contract SupplyChain {
             string  originShopName,
             string  originShopInformation,
             string  originShopLatitude,
-            string  originShopLongitude,
-            string  productNotes
+            string  originShopLongitude
         )
     {
         itemSKU = items[_sn].sku;
@@ -360,7 +359,6 @@ contract SupplyChain {
         originShopInformation = items[_sn].originShopInformation;
         originShopLatitude = items[_sn].originShopLatitude;
         originShopLongitude = items[_sn].originShopLongitude;
-        productNotes = items[_sn].productNotes;
 
         return
         (
@@ -371,8 +369,7 @@ contract SupplyChain {
             originShopName,
             originShopInformation,
             originShopLatitude,
-            originShopLongitude,
-            productNotes
+            originShopLongitude
         );
     }
 

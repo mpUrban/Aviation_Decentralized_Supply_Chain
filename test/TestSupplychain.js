@@ -1,10 +1,7 @@
 //1 events
-//2 productNotes - move out of buffer one
-
-
-
 
 // This script is designed to test the solidity smart contract - SuppyChain.sol -- and the various functions within
+
 // Declare a variable and assign the compiled smart contract artifact
 var SupplyChain = artifacts.require('SupplyChain')
 
@@ -58,7 +55,7 @@ contract('SupplyChain', function(accounts) {
       })
 
 
-    it("Can remove Item, fetchItemBufferOne", async () => {
+    it("Can remove Item", async () => {
         const supplyChain = await SupplyChain.deployed()
         
         await supplyChain.removeItem(
@@ -71,17 +68,20 @@ contract('SupplyChain', function(accounts) {
             productNotes,
             { from: accounts[1], gas: 1000000 }
         );
-        let item = await supplyChain.fetchItemBufferOne.call(1)
+        // Retrieve the just now saved item from blockchain by calling function fetchItem()
+        let itemBufferOne = await supplyChain.fetchItemBufferOne.call(sn)
         
-        //console.log("Removed Item", item)
+        //console.log("itemBufferOne: ", itemBufferOne);
+
+        let itemBufferTwo = await supplyChain.fetchItemBufferTwo.call(sn)
 
         // item vector index relates to fetchItemBufferOne
-        assert.equal(item[0].toString(), sku, "sku match error");
-        assert.equal(item[4].toString(), originShopName, "originShopName match error");
-        assert.equal(item[5].toString(), originShopInformation, "originShopInformation match error");
-        assert.equal(item[6].toString(), originShopLatitude, "originShopLatitude match error");
-        assert.equal(item[7].toString(), originShopLongitude, "originShopLongitude match error");
-        assert.equal(item[8].toString(), productNotes, "productNotes match error");
+        assert.equal(itemBufferOne[0].toString(), sku, "sku match error");
+        assert.equal(itemBufferOne[4].toString(), originShopName, "originShopName match error");
+        assert.equal(itemBufferOne[5].toString(), originShopInformation, "originShopInformation match error");
+        assert.equal(itemBufferOne[6].toString(), originShopLatitude, "originShopLatitude match error");
+        assert.equal(itemBufferOne[7].toString(), originShopLongitude, "originShopLongitude match error");
+        assert.equal(itemBufferTwo[3].toString(), productNotes, "productNotes match error");
     });
 
 
@@ -120,7 +120,7 @@ contract('SupplyChain', function(accounts) {
         assert.equal(itemBufferOne[5].toString(), originShopInformation, "originShopInformation match error");
         assert.equal(itemBufferOne[6].toString(), originShopLatitude, "originShopLatitude match error");
         assert.equal(itemBufferOne[7].toString(), originShopLongitude, "originShopLongitude match error");
-        assert.equal(itemBufferOne[8].toString(), productNotes, "productNotes match error");
+        assert.equal(itemBufferTwo[3].toString(), productNotes, "productNotes match error");
         assert.equal(itemBufferTwo[5], 1, 'state check failed')
         
     })    
@@ -159,7 +159,7 @@ contract('SupplyChain', function(accounts) {
         assert.equal(itemBufferOne[5].toString(), originShopInformation, "originShopInformation match error");
         assert.equal(itemBufferOne[6].toString(), originShopLatitude, "originShopLatitude match error");
         assert.equal(itemBufferOne[7].toString(), originShopLongitude, "originShopLongitude match error");
-        assert.equal(itemBufferOne[8].toString(), productNotes, "productNotes match error");
+        assert.equal(itemBufferTwo[3].toString(), productNotes, "productNotes match error");
         assert.equal(itemBufferTwo[5], 2, 'state check failed')
         
     })    
@@ -198,7 +198,7 @@ contract('SupplyChain', function(accounts) {
         assert.equal(itemBufferOne[5].toString(), originShopInformation, "originShopInformation match error");
         assert.equal(itemBufferOne[6].toString(), originShopLatitude, "originShopLatitude match error");
         assert.equal(itemBufferOne[7].toString(), originShopLongitude, "originShopLongitude match error");
-        assert.equal(itemBufferOne[8].toString(), productNotes, "productNotes match error");
+        assert.equal(itemBufferTwo[3].toString(), productNotes, "productNotes match error");
         assert.equal(itemBufferTwo[5], 3, 'state check failed')
           
     })    
@@ -237,7 +237,7 @@ contract('SupplyChain', function(accounts) {
         assert.equal(itemBufferOne[5].toString(), originShopInformation, "originShopInformation match error");
         assert.equal(itemBufferOne[6].toString(), originShopLatitude, "originShopLatitude match error");
         assert.equal(itemBufferOne[7].toString(), originShopLongitude, "originShopLongitude match error");
-        assert.equal(itemBufferOne[8].toString(), productNotes, "productNotes match error");
+        assert.equal(itemBufferTwo[3].toString(), productNotes, "productNotes match error");
         assert.equal(itemBufferTwo[5], 4, 'state check failed')
         
     })    
@@ -272,7 +272,7 @@ contract('SupplyChain', function(accounts) {
         assert.equal(itemBufferOne[5].toString(), originShopInformation, "originShopInformation match error");
         assert.equal(itemBufferOne[6].toString(), originShopLatitude, "originShopLatitude match error");
         assert.equal(itemBufferOne[7].toString(), originShopLongitude, "originShopLongitude match error");
-        assert.equal(itemBufferOne[8].toString(), productNotes, "productNotes match error");
+        assert.equal(itemBufferTwo[3].toString(), productNotes, "productNotes match error");
         assert.equal(itemBufferTwo[5], 5, 'state check failed')
               
     })    
@@ -308,7 +308,7 @@ contract('SupplyChain', function(accounts) {
         assert.equal(itemBufferOne[5].toString(), originShopInformation, "originShopInformation match error");
         assert.equal(itemBufferOne[6].toString(), originShopLatitude, "originShopLatitude match error");
         assert.equal(itemBufferOne[7].toString(), originShopLongitude, "originShopLongitude match error");
-        assert.equal(itemBufferOne[8].toString(), productNotes, "productNotes match error");
+        assert.equal(itemBufferTwo[3].toString(), productNotes, "productNotes match error");
         assert.equal(itemBufferTwo[5], 6, 'state check failed')
         
     })    
