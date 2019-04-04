@@ -1,5 +1,19 @@
 # Aviation Decentralized Supply Chain Application
 
+This decentralization application (dapp) can be used to track the history of a used aviation engine part.  The origin starts from the shop removing the part and ends upon purchase from a buyer.  The shop removing the part hands it off to a store where further inspections and repairs are performed.  
+
+![alt text][webapp]
+
+[webapp]:https://github.com/mpUrban/Aviation_Decentralized_Supply_Chain/blob/master/images/webapp.png "Web App"
+
+
+
+
+
+
+
+
+
 These UML diagrams detail the architecture of an application to track used part status and sales for the aviation industry. 
 
 ## Activity Diagram:
@@ -58,3 +72,23 @@ The result of the tests should appear as:
 ![alt text][unittesting]
 
 [unittesting]:https://github.com/mpUrban/Aviation_Decentralized_Supply_Chain/blob/master/images/unit_testing.png "Unit Testing"
+
+To run the web application, from a new bash terminal:
+
+```
+npm run dev
+```
+
+
+
+
+
+
+
+## Rinkeby Testnet Deployment
+
+These contracts are also deployed on the Ethereum Rinkeby testnet:
+
+![alt text][rinkeby]
+
+[rinkeby]:https://github.com/mpUrban/Aviation_Decentralized_Supply_Chain/blob/master/images/rinkeby_deployment.png
