@@ -98,10 +98,10 @@ contract('SupplyChain', function(accounts) {
         await supplyChain.cleanInspectItem(sn,{from: originShopID, gas: 1000000});
         
         // Watch the emitted event Built()
-        // var event = supplyChain.cleanInspectItem()
-        // await event.watch((err, res) => {
-        //     cleanInspectEvent = true
-        // })
+        var event = supplyChain.CleanInspect()
+        await event.watch((err, res) => {
+            cleanInspectEvent = true
+        })
         
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
@@ -133,10 +133,10 @@ contract('SupplyChain', function(accounts) {
         var shippedEvent = false;
         
         // Watch the emitted event Built()
-        // var event = supplyChain.cleanInspectItem()
-        // await event.watch((err, res) => {
-        //     cleanInspectEvent = true
-        // })
+        var event = supplyChain.Shipped()
+        await event.watch((err, res) => {
+            shippedEvent = true
+        })
         
 
         // Mark an item as cleanInspect by calling function processtItem()
@@ -172,10 +172,10 @@ contract('SupplyChain', function(accounts) {
         var receivedEvent = false;
         
         // Watch the emitted event Built()
-        // var event = supplyChain.cleanInspectItem()
-        // await event.watch((err, res) => {
-        //     cleanInspectEvent = true
-        // })
+        var event = supplyChain.Received()
+        await event.watch((err, res) => {
+            receivedEvent = true
+        })
         
 
         // Mark an item as cleanInspect by calling function processtItem()
@@ -211,10 +211,10 @@ contract('SupplyChain', function(accounts) {
         var inspectedEvent = false;
         
         // Watch the emitted event Built()
-        // var event = supplyChain.cleanInspectItem()
-        // await event.watch((err, res) => {
-        //     cleanInspectEvent = true
-        // })
+        var event = supplyChain.Inspected()
+        await event.watch((err, res) => {
+            inspectedEvent = true
+        })
         
 
         // Mark an item as cleanInspect by calling function processtItem()
@@ -249,10 +249,10 @@ contract('SupplyChain', function(accounts) {
         var repairedEvent = false;
         
         // Watch the emitted event Built()
-        // var event = supplyChain.cleanInspectItem()
-        // await event.watch((err, res) => {
-        //     cleanInspectEvent = true
-        // })
+        var event = supplyChain.Repaired()
+        await event.watch((err, res) => {
+            repairedEvent = true
+        })
         
         await supplyChain.repairItem(sn,{from: originShopID, gas: 1000000});
         
@@ -285,10 +285,10 @@ contract('SupplyChain', function(accounts) {
         var purchasedEvent = false;
         
         // Watch the emitted event Built()
-        // var event = supplyChain.cleanInspectItem()
-        // await event.watch((err, res) => {
-        //     cleanInspectEvent = true
-        // })
+        var event = supplyChain.Purchased()
+        await event.watch((err, res) => {
+            purchasedEvent = true
+        })
         
         await supplyChain.buyItem(sn,{from: originShopID, gas: 1000000});
         
