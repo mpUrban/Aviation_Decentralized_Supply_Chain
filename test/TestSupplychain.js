@@ -16,7 +16,6 @@ contract('SupplyChain', function(accounts) {
     const originShopLatitude = "39.103119"
     const originShopLongitude = "-84.512016"
     var productID = sku + sn
-    console.log('ProductID: ',productID)
     const productNotes = "Fan Disk - LLP"
     const productPrice = web3.toWei(1, "ether")
     var itemState = 0
@@ -25,18 +24,19 @@ contract('SupplyChain', function(accounts) {
     const buyerID = accounts[4]
     const emptyAddress = '0x00000000000000000000000000000000000000'
 
-    ///Available Accounts
-    ///==================
-    ///(0) 0x27d8d15cbc94527cadf5ec14b69519ae23288b95
-    ///(1) 0x018c2dabef4904ecbd7118350a0c54dbeae3549a
-    ///(2) 0xce5144391b4ab80668965f2cc4f2cc102380ef0a
-    ///(3) 0x460c31107dd048e34971e57da2f99f659add4f02
-    ///(4) 0xd37b7b8c62be2fdde8daa9816483aebdbd356088
-    ///(5) 0x27f184bdc0e7a931b507ddd689d76dba10514bcb
-    ///(6) 0xfe0df793060c49edca5ac9c104dd8e3375349978
-    ///(7) 0xbd58a85c96cc6727859d853086fe8560bc137632
-    ///(8) 0xe07b5ee5f738b2f87f88b99aac9c64ff1e0c7917
-    ///(9) 0xbd3ff2e3aded055244d66544c9c059fa0851da44
+    // Available Accounts
+    // ==================
+    // (0) 0x0782140de231a91c2cef8c830107d995043cb2cc (~100 ETH)
+    // (1) 0x36a2b46892a90630e54c58bb08b0cb4dcc1e1cfd (~100 ETH)
+    // (2) 0x02b5a9ffb677b37235d0223a5692ad2b190826ad (~100 ETH)
+    // (3) 0x5c789066430773ca1bbc6f1544b9b6990bdb3e2c (~100 ETH)
+    // (4) 0x2f6bbd07152b5d034177a83d695c81b7b5989742 (~100 ETH)
+    // (5) 0x1072062d00ee9b4e13a83c3dd94959aa75f6c71b (~100 ETH)
+    // (6) 0xf9e04ee365cc8358469668be7e9ed19bc2369ff3 (~100 ETH)
+    // (7) 0x9688ebb2ffdac95552df7f75fa0c2b3922a227b6 (~100 ETH)
+    // (8) 0x1b1d56b4676d73bbe035bea5edfb50ade94b826b (~100 ETH)
+    // (9) 0xcb04f72af7d03797d55ebb2517b905e1766da753 (~100 ETH)
+    
 
     console.log("ganache-cli accounts used here...")
     console.log("Contract Owner: accounts[0] ", accounts[0])

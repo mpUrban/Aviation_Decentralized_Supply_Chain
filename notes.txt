@@ -16,7 +16,7 @@ Truffle v4.1.14 (core: 4.1.14)
 Solidity v0.4.24 (solc-js)
 
 
-ganache-cli -m "spirit supply whale amount human item harsh scare congress discover talent hamster"
+ganache-cli -m "conduct shop dumb crash pretty movie gesture ski calm beach injury mixture"
 
 truffle compile
 
@@ -56,7 +56,7 @@ truffle deploy --network rinkeby --reset
 
 
 
-        event Removed(uint sn);
+    event Removed(uint sn);
     event CleanInspect(uint sn);
     event Shipped(uint sn);
     event Received(uint sn);
@@ -78,3 +78,37 @@ truffle deploy --network rinkeby --reset
         Repaired,     // 5
         Purchased     // 6
     }
+
+
+
+210074718 (master *) Aviation_Decentralized_Supply_Chain
+$ truffle migrate --network rinkeby
+Using network 'rinkeby'.
+
+Running migration: 1_initial_migration.js
+  Deploying Migrations...
+  ... 0x15c55cb1bd207b7b3fceff6cd19f730478abfaada4bf501625affdad8f267ff7
+  Migrations: 0xe7be76d990b5b9e1e16793fca557f9633d21d396
+Saving successful migration to network...
+  ... 0x516e6111d36ca263a34ce08ee6e33da68b0aa0c279005b09c812dddc49991194
+Saving artifacts...
+Running migration: 2_deploy_contracts.js
+  Deploying ShopRole...
+  ... 0x950a567625a920fa91ac8538ad61373bd60b5a5424a7b953e8c43eb5f770d976
+  ShopRole: 0x394b42148a4fa55f745021d9751a6e74880cdc97
+  Deploying StoreRole...
+  ... 0xc9ac20aac12814115b5cfb3dc7584bd1dfcf3b832585b4586301f2bf08cc0b80
+  StoreRole: 0x9691a1ff53438f4ca0e26a9a29e2cf242f71580c
+  Deploying BuyerRole...
+  ... 0xedfe1d36a158295f6ed48f9df4ab78923b8ea66a472913fd8d63e52eaad2c053
+  BuyerRole: 0xebbfb71ff97717088be19872403447843252e7e5
+  Deploying SupplyChain...
+  ... 0x7f037dadfd8f2bde9d12fab4251456e9f0e059c2109508456c41ae09e528e99a
+  SupplyChain: 0x3b8ea95011d4e859ce68e5ed55692173abdb5614
+Saving successful migration to network...
+  ... 0x1b7110eeba40e291db4be64e80a95ed5921ba9373d03b830480282c77f429ba5
+Saving artifacts...
+
+
+
+
