@@ -189,7 +189,6 @@ contract SupplyChain {
         // Check SN is new
         require(items[_sn].sn == 0, "SN already exists");
 
-        // Do I need to put in placeholder values?  
 
         // Add the new item as part of Removal
         Item memory newItem;
@@ -320,7 +319,6 @@ contract SupplyChain {
     checkValue(_sn)
 
 
-    ///////// working here
 
     {
 
@@ -350,11 +348,19 @@ contract SupplyChain {
             string  originShopName,
             string  originShopInformation,
             string  originShopLatitude,
-            string  originShopLongitude
+            string  originShopLongitude,
+            string  productNotes
         )
     {
-        // Assign values to the 8 parameters
-
+        itemSKU = items[_sn].sku;
+        itemSN = items[_sn].sn;
+        ownerID = items[_sn].ownerID;
+        originShopID = items[_sn].originShopID;
+        originShopName = items[_sn].originShopName;
+        originShopInformation = items[_sn].originShopInformation;
+        originShopLatitude = items[_sn].originShopLatitude;
+        originShopLongitude = items[_sn].originShopLongitude;
+        productNotes = items[_sn].productNotes;
 
         return
         (
@@ -365,7 +371,8 @@ contract SupplyChain {
             originShopName,
             originShopInformation,
             originShopLatitude,
-            originShopLongitude
+            originShopLongitude,
+            productNotes
         );
     }
 
@@ -377,15 +384,21 @@ contract SupplyChain {
             uint    productID,
             string  productNotes,
             uint    productPrice,
-            uint    itemState,
+            State    itemState,
             address storeID,
-            address retailerID,
             address buyerID
         )
     {
-        // Assign values to the 9 parameters
-
-
+        
+        itemSKU = items[_sn].sku;
+        itemSN = items[_sn].sn;
+        productID = items[_sn].productID;
+        productNotes = items[_sn].productNotes;
+        productPrice = items[_sn].productPrice;
+        itemState = items[_sn].itemState;
+        storeID = items[_sn].storeID;
+        buyerID = items[_sn].buyerID;
+        
         return
         (
             itemSKU,
@@ -395,7 +408,6 @@ contract SupplyChain {
             productPrice,
             itemState,
             storeID,
-            retailerID,
             buyerID
         );
     }

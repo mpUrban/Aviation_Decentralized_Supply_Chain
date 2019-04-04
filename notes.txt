@@ -22,3 +22,44 @@ truffle compile
 
 truffle migrate
 
+
+
+truffle deploy --network rinkeby --reset
+
+
+
+
+
+
+
+    // Define a struct 'Item' with the following fields:
+    struct Item
+    {
+        uint    sku;  // Stock Keeping Unit (SKU)
+        uint    sn; // Serial Number (SN), recorded by the Shop, goes on the package, can be verified by the Consumer
+        address ownerID;  // Metamask-Ethereum address of the current owner as the product moves through 7 stages
+        address originShopID; // Metamask-Ethereum address of the Shop
+        string  originShopName; // Shop Name
+        string  originShopInformation;  // Shop Information
+        string  originShopLatitude; // Shop Latitude
+        string  originShopLongitude;  // Shop Longitude
+        uint    productID;  // Product ID potentially a combination of sn + sku       //part number?
+        string  productNotes; // Product Notes
+        uint    productPrice; // Product Price
+        State   itemState;  // Product State as represented in the enum above
+        address storeID;  // Metamask-Ethereum address of the Distributor
+        address buyerID; // Metamask-Ethereum address of the Consumer
+    }
+
+
+
+
+
+
+        event Removed(uint sn);
+    event CleanInspect(uint sn);
+    event Shipped(uint sn);
+    event Received(uint sn);
+    event Inspected(uint sn);
+    event Repaired(uint sn);
+    event Purchased(uint sn);
