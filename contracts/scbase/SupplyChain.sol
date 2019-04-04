@@ -194,8 +194,8 @@ contract SupplyChain {
         Item memory newItem;
         newItem.sku = sku;
         newItem.sn = _sn;
-        //ownerID = msg.sender;
         newItem.originShopID = msg.sender;
+        newItem.ownerID = _originShopID;
         newItem.originShopName = _originShopName;
         newItem.originShopInformation = _originShopInformation;
         newItem.originShopLatitude = _originShopLatitude;

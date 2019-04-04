@@ -81,6 +81,10 @@ truffle deploy --network rinkeby --reset
 
 
 
+
+
+
+
 210074718 (master *) Aviation_Decentralized_Supply_Chain
 $ truffle migrate --network rinkeby
 Using network 'rinkeby'.
