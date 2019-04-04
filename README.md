@@ -87,7 +87,7 @@ npm run dev
 
 ## Rinkeby Testnet Deployment
 
-These contracts are also deployed on the Ethereum Rinkeby testnet:
+These contracts are also deployed on the Ethereum Rinkeby testnet.  The contract address is 0x3B8Ea95011D4E859ce68E5Ed55692173AbdB5614.  
 
 ![alt text][rinkeby]
 
