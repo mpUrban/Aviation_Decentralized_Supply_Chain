@@ -1,3 +1,9 @@
+//1 events
+//2 productNotes - move out of buffer one
+
+
+
+
 // This script is designed to test the solidity smart contract - SuppyChain.sol -- and the various functions within
 // Declare a variable and assign the compiled smart contract artifact
 var SupplyChain = artifacts.require('SupplyChain')
@@ -13,10 +19,11 @@ contract('SupplyChain', function(accounts) {
     const originShopLatitude = "39.103119"
     const originShopLongitude = "-84.512016"
     var productID = sku + sn
+    console.log('ProductID: ',productID)
     const productNotes = "Fan Disk - LLP"
     const productPrice = web3.toWei(1, "ether")
     var itemState = 0
-    const distributorID = accounts[2]
+    // const distributorID = accounts[2]
     const storeID = accounts[3]
     const buyerID = accounts[4]
     const emptyAddress = '0x00000000000000000000000000000000000000'
@@ -100,12 +107,12 @@ contract('SupplyChain', function(accounts) {
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         let itemBufferOne = await supplyChain.fetchItemBufferOne.call(sn)
         
-        console.log("itemBufferOne: ", itemBufferOne);
+        //console.log("itemBufferOne: ", itemBufferOne);
 
         let itemBufferTwo = await supplyChain.fetchItemBufferTwo.call(sn)
 
         //console.log("itemBufferTwo: ", itemBufferTwo);
-        console.log("itemBufferTwo State Enum:", itemBufferTwo[5].toNumber())
+        //console.log("itemBufferTwo CleanInspect State Enum:", itemBufferTwo[5].toNumber())
 
         // Verify the result set
         assert.equal(itemBufferOne[0], sku, "sku match error");
@@ -123,142 +130,226 @@ contract('SupplyChain', function(accounts) {
         const supplyChain = await SupplyChain.deployed()
         
         // Declare and Initialize a variable for event
-        var cleanInspectEvent = false;
+        var shippedEvent = false;
         
-        // Watch the emitted event Packed()
+        // Watch the emitted event Built()
+        // var event = supplyChain.cleanInspectItem()
+        // await event.watch((err, res) => {
+        //     cleanInspectEvent = true
+        // })
         
 
-        // Mark an item as Packed by calling function packItem()
+        // Mark an item as cleanInspect by calling function processtItem()
+        await supplyChain.shipItem(sn,{from: originShopID, gas: 1000000});
         
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
+        let itemBufferOne = await supplyChain.fetchItemBufferOne.call(sn)
         
+        //console.log("itemBufferOne: ", itemBufferOne);
+
+        let itemBufferTwo = await supplyChain.fetchItemBufferTwo.call(sn)
+
+        //console.log("itemBufferTwo: ", itemBufferTwo);
+        //console.log("itemBufferTwo Shipped State Enum:", itemBufferTwo[5].toNumber())
 
         // Verify the result set
+        assert.equal(itemBufferOne[0], sku, "sku match error");
+        assert.equal(itemBufferOne[4].toString(), originShopName, "originShopName match error");
+        assert.equal(itemBufferOne[5].toString(), originShopInformation, "originShopInformation match error");
+        assert.equal(itemBufferOne[6].toString(), originShopLatitude, "originShopLatitude match error");
+        assert.equal(itemBufferOne[7].toString(), originShopLongitude, "originShopLongitude match error");
+        assert.equal(itemBufferOne[8].toString(), productNotes, "productNotes match error");
+        assert.equal(itemBufferTwo[5], 2, 'state check failed')
         
     })    
 
-//     // 4th Test
-//     it("Testing smart contract function sellItem() that allows a farmer to sell coffee", async() => {
-//         const supplyChain = await SupplyChain.deployed()
+    // 4th Test
+    it("Testing smart contract function receiveItem() that allows a store to receive a part", async() => {
+        const supplyChain = await SupplyChain.deployed()
         
-//         // Declare and Initialize a variable for event
+        // Declare and Initialize a variable for event
+        var receivedEvent = false;
         
-        
-//         // Watch the emitted event ForSale()
-        
-
-//         // Mark an item as ForSale by calling function sellItem()
-        
-
-//         // Retrieve the just now saved item from blockchain by calling function fetchItem()
+        // Watch the emitted event Built()
+        // var event = supplyChain.cleanInspectItem()
+        // await event.watch((err, res) => {
+        //     cleanInspectEvent = true
+        // })
         
 
-//         // Verify the result set
+        // Mark an item as cleanInspect by calling function processtItem()
+        await supplyChain.receiveItem(sn,productPrice,{from: originShopID, gas: 1000000});
+        
+
+        // Retrieve the just now saved item from blockchain by calling function fetchItem()
+        let itemBufferOne = await supplyChain.fetchItemBufferOne.call(sn)
+        
+        // console.log("itemBufferOne: ", itemBufferOne);
+
+        let itemBufferTwo = await supplyChain.fetchItemBufferTwo.call(sn)
+
+        //console.log("itemBufferTwo: ", itemBufferTwo);
+        //console.log("itemBufferTwo Received State Enum:", itemBufferTwo[5].toNumber())
+
+        // Verify the result set
+        assert.equal(itemBufferOne[0], sku, "sku match error");
+        assert.equal(itemBufferOne[4].toString(), originShopName, "originShopName match error");
+        assert.equal(itemBufferOne[5].toString(), originShopInformation, "originShopInformation match error");
+        assert.equal(itemBufferOne[6].toString(), originShopLatitude, "originShopLatitude match error");
+        assert.equal(itemBufferOne[7].toString(), originShopLongitude, "originShopLongitude match error");
+        assert.equal(itemBufferOne[8].toString(), productNotes, "productNotes match error");
+        assert.equal(itemBufferTwo[5], 3, 'state check failed')
           
-//     })    
+    })    
 
-//     // 5th Test
-//     it("Testing smart contract function buyItem() that allows a distributor to buy coffee", async() => {
-//         const supplyChain = await SupplyChain.deployed()
+    // 5th Test
+    it("Testing smart contract function inspectItem() that allows a store to inspect a part", async() => {
+        const supplyChain = await SupplyChain.deployed()
         
-//         // Declare and Initialize a variable for event
+        // Declare and Initialize a variable for event
+        var inspectedEvent = false;
         
-        
-//         // Watch the emitted event Sold()
-//         var event = supplyChain.Sold()
-        
-
-//         // Mark an item as Sold by calling function buyItem()
-        
-
-//         // Retrieve the just now saved item from blockchain by calling function fetchItem()
+        // Watch the emitted event Built()
+        // var event = supplyChain.cleanInspectItem()
+        // await event.watch((err, res) => {
+        //     cleanInspectEvent = true
+        // })
         
 
-//         // Verify the result set
-        
-//     })    
-
-//     // 6th Test
-//     it("Testing smart contract function shipItem() that allows a distributor to ship coffee", async() => {
-//         const supplyChain = await SupplyChain.deployed()
-        
-//         // Declare and Initialize a variable for event
-        
-        
-//         // Watch the emitted event Shipped()
+        // Mark an item as cleanInspect by calling function processtItem()
+        await supplyChain.inspectItem(sn,{from: originShopID, gas: 1000000});
         
 
-//         // Mark an item as Sold by calling function buyItem()
+        // Retrieve the just now saved item from blockchain by calling function fetchItem()
+        let itemBufferOne = await supplyChain.fetchItemBufferOne.call(sn)
         
+        // console.log("itemBufferOne: ", itemBufferOne);
 
-//         // Retrieve the just now saved item from blockchain by calling function fetchItem()
+        let itemBufferTwo = await supplyChain.fetchItemBufferTwo.call(sn)
+
+        //console.log("itemBufferTwo: ", itemBufferTwo);
+        //console.log("itemBufferTwo Inspected State Enum:", itemBufferTwo[5].toNumber())
+
+        // Verify the result set
+        assert.equal(itemBufferOne[0], sku, "sku match error");
+        assert.equal(itemBufferOne[4].toString(), originShopName, "originShopName match error");
+        assert.equal(itemBufferOne[5].toString(), originShopInformation, "originShopInformation match error");
+        assert.equal(itemBufferOne[6].toString(), originShopLatitude, "originShopLatitude match error");
+        assert.equal(itemBufferOne[7].toString(), originShopLongitude, "originShopLongitude match error");
+        assert.equal(itemBufferOne[8].toString(), productNotes, "productNotes match error");
+        assert.equal(itemBufferTwo[5], 4, 'state check failed')
         
+    })    
 
-//         // Verify the result set
+    // 6th Test
+    it("Testing smart contract function repairItem() that allows a store to repair the part", async() => {
+        const supplyChain = await SupplyChain.deployed()
+        
+        var repairedEvent = false;
+        
+        // Watch the emitted event Built()
+        // var event = supplyChain.cleanInspectItem()
+        // await event.watch((err, res) => {
+        //     cleanInspectEvent = true
+        // })
+        
+        await supplyChain.repairItem(sn,{from: originShopID, gas: 1000000});
+        
+        // Retrieve the just now saved item from blockchain by calling function fetchItem()
+        let itemBufferOne = await supplyChain.fetchItemBufferOne.call(sn)
+        
+        //console.log("itemBufferOne: ", itemBufferOne);
+
+        let itemBufferTwo = await supplyChain.fetchItemBufferTwo.call(sn)
+
+        //console.log("itemBufferTwo: ", itemBufferTwo);
+        //console.log("itemBufferTwo Repaired State Enum:", itemBufferTwo[5].toNumber())
+
+        // Verify the result set
+        assert.equal(itemBufferOne[0], sku, "sku match error");
+        assert.equal(itemBufferOne[4].toString(), originShopName, "originShopName match error");
+        assert.equal(itemBufferOne[5].toString(), originShopInformation, "originShopInformation match error");
+        assert.equal(itemBufferOne[6].toString(), originShopLatitude, "originShopLatitude match error");
+        assert.equal(itemBufferOne[7].toString(), originShopLongitude, "originShopLongitude match error");
+        assert.equal(itemBufferOne[8].toString(), productNotes, "productNotes match error");
+        assert.equal(itemBufferTwo[5], 5, 'state check failed')
               
-//     })    
+    })    
+  
 
-//     // 7th Test
-//     it("Testing smart contract function receiveItem() that allows a retailer to mark coffee received", async() => {
-//         const supplyChain = await SupplyChain.deployed()
+    // 8th Test
+    it("Testing smart contract function buyItem() that allows a consumer to buy a part", async() => {
+        const supplyChain = await SupplyChain.deployed()
         
-//         // Declare and Initialize a variable for event
+        var purchasedEvent = false;
         
+        // Watch the emitted event Built()
+        // var event = supplyChain.cleanInspectItem()
+        // await event.watch((err, res) => {
+        //     cleanInspectEvent = true
+        // })
         
-//         // Watch the emitted event Received()
+        await supplyChain.buyItem(sn,{from: originShopID, gas: 1000000});
         
+        // Retrieve the just now saved item from blockchain by calling function fetchItem()
+        let itemBufferOne = await supplyChain.fetchItemBufferOne.call(sn)
+        
+        //console.log("itemBufferOne: ", itemBufferOne);
 
-//         // Mark an item as Sold by calling function buyItem()
-        
+        let itemBufferTwo = await supplyChain.fetchItemBufferTwo.call(sn)
 
-//         // Retrieve the just now saved item from blockchain by calling function fetchItem()
-        
+        //console.log("itemBufferTwo: ", itemBufferTwo);
+        //console.log("itemBufferTwo Purchased State Enum:", itemBufferTwo[5].toNumber())
 
-//         // Verify the result set
-             
-//     })    
+        // Verify the result set
+        assert.equal(itemBufferOne[0], sku, "sku match error");
+        assert.equal(itemBufferOne[4].toString(), originShopName, "originShopName match error");
+        assert.equal(itemBufferOne[5].toString(), originShopInformation, "originShopInformation match error");
+        assert.equal(itemBufferOne[6].toString(), originShopLatitude, "originShopLatitude match error");
+        assert.equal(itemBufferOne[7].toString(), originShopLongitude, "originShopLongitude match error");
+        assert.equal(itemBufferOne[8].toString(), productNotes, "productNotes match error");
+        assert.equal(itemBufferTwo[5], 6, 'state check failed')
+        
+    })    
 
-//     // 8th Test
-//     it("Testing smart contract function purchaseItem() that allows a consumer to purchase coffee", async() => {
-//         const supplyChain = await SupplyChain.deployed()
-        
-//         // Declare and Initialize a variable for event
-        
-        
-//         // Watch the emitted event Purchased()
-        
+    // 9th Test
+    it("Testing smart contract function fetchItemBufferOne() that allows anyone to fetch item details from blockchain", async() => {
+        const supplyChain = await SupplyChain.deployed()
 
-//         // Mark an item as Sold by calling function buyItem()
-        
+        let itemBufferOne = await supplyChain.fetchItemBufferOne.call(sn, {from: originShopID, gas: 1000000})
 
-//         // Retrieve the just now saved item from blockchain by calling function fetchItem()
+        // console.log("itemBufferOne: ", itemBufferOne);
         
+        assert.equal(itemBufferOne[0].toString(), sku, 'error: invalid sku')
+        assert.equal(itemBufferOne[1].toString(), sn, 'error: invalid sn')
+        assert.equal(itemBufferOne[3].toString(), originShopID, 'error: invalid originShopID')
+        assert.equal(itemBufferOne[4].toString(), originShopName, 'error: invalid originShopName')
+        assert.equal(itemBufferOne[5].toString(), originShopInformation, 'error: invalid originShopInformation')
+        assert.equal(itemBufferOne[6].toString(), originShopLatitude, 'error: invalid originShopLatitude')
+        assert.equal(itemBufferOne[7].toString(), originShopLongitude, 'error: invalid originShopLongitude')
+        
+    })
 
-//         // Verify the result set
-        
-//     })    
+    // 10th Test
+    it("Testing smart contract function fetchItemBufferTwo() that allows anyone to fetch item details from blockchain", async() => {
+        const supplyChain = await SupplyChain.deployed()
 
-//     // 9th Test
-//     it("Testing smart contract function fetchItemBufferOne() that allows anyone to fetch item details from blockchain", async() => {
-//         const supplyChain = await SupplyChain.deployed()
+        let itemBufferTwo = await supplyChain.fetchItemBufferTwo.call(sn)
 
-//         // Retrieve the just now saved item from blockchain by calling function fetchItem()
+        // console.log("itemBufferTwo: ", itemBufferTwo);
+        // console.log("itemBufferTwo ProductID: ", itemBufferTwo[2].toString());
         
+        assert.equal(itemBufferTwo[0].toString(), sku, 'error: invalid sku')
+        assert.equal(itemBufferTwo[1].toString(), sn, 'error: invalid sn')
+        assert.equal(itemBufferTwo[2].toString(), productID, 'error: invalid productID')
+        assert.equal(itemBufferTwo[3].toString(), productNotes, 'error: invalid productNotes')
+        // assert.equal(itemBufferTwo[4].toString(), productPrice, 'error: invalid productPrice')
+        assert.equal(itemBufferTwo[5], 6, 'error: invalid itemState')
+        // need to call from appropriate address
+        // assert.equal(itemBufferTwo[6].toString(), storeID, 'error: invalid storeID')
+        // assert.equal(itemBufferTwo[7].toString(), buyerID, 'error: invalid buyerID')
         
-//         // Verify the result set:
-        
-//     })
-
-//     // 10th Test
-//     it("Testing smart contract function fetchItemBufferTwo() that allows anyone to fetch item details from blockchain", async() => {
-//         const supplyChain = await SupplyChain.deployed()
-
-//         // Retrieve the just now saved item from blockchain by calling function fetchItem()
-        
-        
-//         // Verify the result set:
-        
-//     })
+    })
 
 });

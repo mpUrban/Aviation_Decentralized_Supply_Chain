@@ -133,7 +133,7 @@ contract SupplyChain {
 
     // Define a modifier that checks if an item.state of a sn is Inspected
     modifier inspected(uint _sn) {
-        require(items[_sn].itemState == State.CleanInspect);
+        require(items[_sn].itemState == State.Inspected);
         _;
     }
 
@@ -200,7 +200,7 @@ contract SupplyChain {
         newItem.originShopInformation = _originShopInformation;
         newItem.originShopLatitude = _originShopLatitude;
         newItem.originShopLongitude = _originShopLongitude;
-        newItem.productID = _sn; // add PN?
+        newItem.productID = _sn + sku; // add PN?
         newItem.productNotes = _productNotes;
         // newItem.productPrice = 0; // placeholder = to be updated following inspection?
         newItem.itemState = State.Removed;
@@ -271,7 +271,7 @@ contract SupplyChain {
     }
 
     // Define a function 'inspectItem' that allows a shop to mark an item 'Inspected'
-    function inspectItem(uint _sn, uint _price) public
+    function inspectItem(uint _sn) public
     // Call modifier to check if sn has passed previous supply chain stage
     received(_sn)
 
@@ -288,7 +288,7 @@ contract SupplyChain {
     }
 
     // Define a function 'repairItem' that allows a shop to mark an item 'Repaired'
-    function repairItem(uint _sn, uint _price) public
+    function repairItem(uint _sn) public
     // Call modifier to check if sn has passed previous supply chain stage
     inspected(_sn)
 

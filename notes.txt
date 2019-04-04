@@ -63,3 +63,18 @@ truffle deploy --network rinkeby --reset
     event Inspected(uint sn);
     event Repaired(uint sn);
     event Purchased(uint sn);
+
+
+
+
+
+
+      enum State {
+        Removed,      // 0
+        CleanInspect, // 1
+        Shipped,      // 2
+        Received,     // 3
+        Inspected,    // 4
+        Repaired,     // 5
+        Purchased     // 6
+    }
