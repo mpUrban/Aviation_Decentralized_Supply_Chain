@@ -1,4 +1,11 @@
 pragma solidity ^ 0.4.24;
+
+import "../scaccesscontrol/BuyerRole.sol";
+import "../scaccesscontrol/ShopRole.sol";
+import "../scaccesscontrol/StoreRole.sol";
+import "../sccore/Ownable.sol";
+
+
 // Define a contract 'Supplychain'
 contract SupplyChain {
 
