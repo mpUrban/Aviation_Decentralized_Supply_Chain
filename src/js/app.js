@@ -34,7 +34,6 @@ App = {
         App.originShopLongitude = $("#originShopLongitude").val();
         App.productNotes = $("#productNotes").val();
         App.productPrice = $("#productPrice").val();
-        App.distributorID = $("#distributorID").val();
         App.retailerID = $("#retailerID").val();
         App.consumerID = $("#consumerID").val();
 
@@ -49,7 +48,6 @@ App = {
             App.originShopLongitude, 
             App.productNotes, 
             App.productPrice, 
-            App.distributorID, 
             App.retailerID, 
             App.consumerID
         );
@@ -88,7 +86,7 @@ App = {
         }
         // If no injected web3 instance is detected, fall back to Ganache
         else {
-            App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+            App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
         }
 
         App.getMetaskAccountID();
@@ -188,6 +186,10 @@ App = {
 
 
     removeItem: function(event) {
+        web3 = new Web3(App.web3Provider);
+        console.log('provider: ' +window.web3.currentProvider);
+        web3.version.getNetwork(function(err,res){console.log(res)});
+        
         event.preventDefault();
         var processId = parseInt($(event.target).data('id'));
 
