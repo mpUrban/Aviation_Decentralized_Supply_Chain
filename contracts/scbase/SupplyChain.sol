@@ -7,10 +7,13 @@ import "../sccore/Ownable.sol";
 
 
 // Define a contract 'Supplychain'
-contract SupplyChain {
+contract SupplyChain is BuyerRole,
+                        ShopRole,
+                        StoreRole,
+                        Ownable {
 
     // Define 'owner'
-    address owner;
+    // address owner;
 
     // Define a variable called 'sn' for Serial Number (SN)
     uint  sn;
@@ -82,10 +85,10 @@ contract SupplyChain {
 
 
     // Define a modifer that checks to see if msg.sender == owner of the contract
-    modifier onlyOwner() {
-        require(msg.sender == owner);
-        _;
-    }
+    // modifier onlyOwner() {
+    //     require(msg.sender == owner);
+    //     _;
+    // }
 
     // Define a modifer that verifies the Caller
     modifier verifyCaller(address _address) {
@@ -168,17 +171,17 @@ contract SupplyChain {
     // and set 'sku' to 1
     // and set 'sn' to 1
     constructor() public payable {
-        owner = msg.sender;
+        // owner = msg.sender;
         sku = 1;
         sn = 1;
     }
 
     // Define a function 'kill' if required
-    function kill() public {
-        if (msg.sender == owner) {
-            selfdestruct(owner);
-        }
-    }
+    // function kill() public {
+    //     if (msg.sender == owner) {
+    //         selfdestruct(owner);
+    //     }
+    // }
 
 
 
@@ -267,6 +270,7 @@ contract SupplyChain {
 
     // Call modifier to verify caller of this function
     verifyCaller(items[_sn].originShopID)
+    onlyShop()
 
     {
         // Update the appropriate fields
